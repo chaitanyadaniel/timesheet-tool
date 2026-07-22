@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const monthNames = [
@@ -57,8 +57,18 @@ function App() {
   const today = new Date();
   const [viewDate, setViewDate] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState(today);
+  const [entries, setEntries] = useState({});
+  const [hoursInput, setHoursInput] = useState('');
+  const [taskInput, setTaskInput] = useState('');
 
   const calendarDays = useMemo(() => buildCalendarDays(viewDate.getFullYear(), viewDate.getMonth()), [viewDate]);
+  const dateKey = selectedDate.toDateString();
+  const currentEntry = entries[dateKey] || { hours: '', task: '' };
+
+  useEffect(() => {
+    setHoursInput(currentEntry.hours);
+    setTaskInput(currentEntry.task);
+  }, [dateKey, currentEntry.hours, currentEntry.task]);
 
   const handlePrevMonth = () => {
     setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() - 1, 1));
@@ -72,6 +82,17 @@ function App() {
     const nextDate = new Date(viewDate.getFullYear(), viewDate.getMonth() + monthOffset, day);
     setViewDate(new Date(nextDate.getFullYear(), nextDate.getMonth(), 1));
     setSelectedDate(nextDate);
+  };
+
+  const handleSaveEntry = (event) => {
+    event.preventDefault();
+    setEntries((previousEntries) => ({
+      ...previousEntries,
+      [dateKey]: {
+        hours: hoursInput,
+        task: taskInput,
+      },
+    }));
   };
 
   const formattedSelected = selectedDate.toLocaleDateString('en-US', {
@@ -135,6 +156,45 @@ function App() {
             <p>Selected date</p>
             <strong>{formattedSelected}</strong>
           </div>
+
+          <form className="detail-panel" onSubmit={handleSaveEntry}>
+            <div className="detail-panel-header">
+              <h3>Log hours & tasks</h3>
+              <span>{formattedSelected}</span>
+            </div>
+
+            <label>
+              Hours worked
+              <input
+                type="number"
+                min="0"
+                step="0.5"
+                value={hoursInput}
+                onChange={(event) => setHoursInput(event.target.value)}
+                placeholder="8"
+              />
+            </label>
+
+            <label>
+              Task details
+              <textarea
+                rows="3"
+                value={taskInput}
+                onChange={(event) => setTaskInput(event.target.value)}
+                placeholder="Describe the work completed today"
+              />
+            </label>
+
+            <button type="submit">Save entry</button>
+
+            <div className="saved-entry">
+              <p>Saved for this day</p>
+              <strong>
+                {currentEntry.hours ? `${currentEntry.hours} hours` : 'No hours recorded yet'}
+              </strong>
+              <p>{currentEntry.task || 'Add a task summary to keep this date organized.'}</p>
+            </div>
+          </form>
         </div>
       </section>
     </main>
