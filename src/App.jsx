@@ -103,17 +103,26 @@ function App() {
   });
 
   return (
-    <main className="app-shell">
-      <section className="hero-card">
-        <div className="hero-copy">
-          <p className="eyebrow">Internal timesheet</p>
-          <h1>Plan your workweek with a simple calendar.</h1>
-          <p>
-            Choose a date to start logging hours, review schedules, or mark important deadlines.
-          </p>
+    <div className="page-frame">
+      <header className="topbar">
+        <div>
+          <p className="eyebrow">Internal tools</p>
+          <h1>Timesheet Tracker</h1>
         </div>
+        <button type="button" className="topbar-action">New entry</button>
+      </header>
 
-        <div className="calendar-card">
+      <main className="app-shell">
+        <section className="hero-card">
+          <div className="hero-copy">
+            <p className="eyebrow">Internal timesheet</p>
+            <h2>Plan your workweek with a simple calendar.</h2>
+            <p>
+              Choose a date to start logging hours, review schedules, or mark important deadlines.
+            </p>
+          </div>
+
+          <div className="calendar-card">
           <div className="calendar-header">
             <button type="button" onClick={handlePrevMonth} aria-label="Previous month">
               ←
@@ -195,9 +204,15 @@ function App() {
               <p>{currentEntry.task || 'Add a task summary to keep this date organized.'}</p>
             </div>
           </form>
-        </div>
-      </section>
-    </main>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footerbar">
+        <span>© 2026 Internal Operations</span>
+        <span>Keep your weekly hours accurate</span>
+      </footer>
+    </div>
   );
 }
 

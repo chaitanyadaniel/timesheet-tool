@@ -25,8 +25,39 @@ button {
   min-height: 100vh;
 }
 
-.app-shell {
+.page-frame {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar,
+.footerbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(15, 23, 42, 0.75);
+  color: #f8fafc;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.topbar-action {
+  border: none;
+  border-radius: 999px;
+  background: #38bdf8;
+  color: #082f49;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.app-shell {
+  flex: 1;
   display: grid;
   place-items: center;
   padding: 2rem;
@@ -233,6 +264,14 @@ button {
 }
 
 @media (max-width: 760px) {
+  .topbar,
+  .footerbar {
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+    padding: 1rem;
+  }
+
   .hero-card {
     grid-template-columns: 1fr;
   }
