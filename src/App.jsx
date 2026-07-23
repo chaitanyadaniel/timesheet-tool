@@ -107,6 +107,8 @@ function App() {
       <header className="topbar">
         <div>
           <p className="eyebrow">Internal tools</p>
+          <h1>Welcome</h1>
+          
           <h1>Timesheet Tracker</h1>
         </div>
         <button type="button" className="topbar-action">New entry</button>
