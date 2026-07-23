@@ -42,13 +42,13 @@ button {
 }
 
 .topbar h1 {
-  margin: 0;
+  margin: 1;
   font-size: 1.2rem;
 }
 
 .topbar-action {
   border: none;
-  border-radius: 999px;
+  border-radius: 1000px;
   background: #38bdf8;
   color: #082f49;
   padding: 0.6rem 1rem;
