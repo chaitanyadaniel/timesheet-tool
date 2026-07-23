@@ -107,7 +107,7 @@ function App() {
       <header className="topbar">
         <div>
           <p className="eyebrow">Internal tools</p>
-          <h1>Welcome</h1>
+          <h1>Welcome User</h1>
           
           <h1>Timesheet Tracker</h1>
         </div>
